@@ -1,20 +1,23 @@
-from dbmanager import Manager, CryptoDB
+from easydb import CryptoDB
 
-PATH = r"C:/Users/Sam/PycharmProjects/dbmanager/db"
+EMAIL = "stevejobs@apple.com"
+PASSWORD = "fortnite"
 
 
 def main():
-    with Manager(PATH) as manager:
-        password_db = CryptoDB(manager, "Logins")
+    with CryptoDB("C:/Users/Sam/PycharmProjects/dbmanager/db/Passwords.db") as password_db:
+        if password_db.account_taken(EMAIL):
+            print("Account taken")
 
-        email = input("Email: ")
-        password = input("Password: ")
+            if password_db.password_is_correct(EMAIL, PASSWORD):
+                print("Password is correct")
 
-        if password_db.email_taken(email):
-            print(password_db.password_is_correct(email, password))
+            else:
+                print("Password is wrong")
 
         else:
-            password_db.add_account(email, password)
+            password_db.add_account(EMAIL, PASSWORD)
+            print("Added account")
 
 
 if __name__ == "__main__":
