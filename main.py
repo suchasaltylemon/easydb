@@ -1,22 +1,24 @@
 from easydb import CryptoDB
 
-EMAIL = "stevejobs@apple.com"
-PASSWORD = "fortnite"
+PATH = "./db/AccountsDB.db"
 
 
 def main():
-    with CryptoDB("C:/Users/Sam/PycharmProjects/dbmanager/db/Passwords.db") as password_db:
-        if password_db.account_taken(EMAIL):
+    with CryptoDB(PATH) as password_db:
+        email = input("Email: ").lower().strip()
+        password = input("Password: ").strip()
+
+        if password_db.account_taken(email):
             print("Account taken")
 
-            if password_db.password_is_correct(EMAIL, PASSWORD):
+            if password_db.password_is_correct(email, password):
                 print("Password is correct")
 
             else:
                 print("Password is wrong")
 
         else:
-            password_db.add_account(EMAIL, PASSWORD)
+            password_db.add_account(email, password)
             print("Added account")
 
 
