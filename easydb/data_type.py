@@ -2,5 +2,7 @@ from enum import Enum
 
 
 class DataType(Enum):
-    String = "string"
+    String = "text"
     Integer = "integer"
+    Null = "null"
+    Real = "real"
